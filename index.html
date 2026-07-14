@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ติวสอบสุขศึกษา ป.6 🩺</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Mali:wght@400;500;600;700&family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --pink:#ff4f9a; --pink-soft:#ffe3f0; --pink-deep:#d61f74;
+    --red:#ff5a5f; --red-soft:#ffe4e4; --red-deep:#d63031;
+    --blue:#2aa9e0; --blue-soft:#e2f4fd; --blue-deep:#1673a8;
+    --green:#3ec46d; --green-soft:#e2f7ea; --green-deep:#1e9b4d;
+    --purple:#a05cff; --purple-soft:#f0e7ff;
+    --orange:#ff9f43; --yellow:#ffd43b;
+    --ink:#2b2340; --muted:#6a6480; --paper:#fff;
+    --shadow:0 8px 26px rgba(90,50,120,.12);
+    --shadow-sm:0 3px 10px rgba(90,50,120,.10);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Sarabun',system-ui,sans-serif;
+    color:var(--ink); line-height:1.6;
+    background:linear-gradient(135deg,#fff0f7 0%,#eef6ff 45%,#eafaef 100%);
+    background-attachment:fixed;
+    -webkit-text-size-adjust:100%;
+  }
+  h1,h2,h3,.mali{font-family:'Mali','Sarabun',sans-serif}
+  .wrap{max-width:960px;margin:0 auto;padding:0 14px 60px}
+
+  /* ---------- HEADER ---------- */
+  header.hero{
+    background:linear-gradient(120deg,#ff4f9a,#a05cff 55%,#2aa9e0);
+    color:#fff;padding:26px 16px 22px;text-align:center;
+    border-radius:0 0 30px 30px;box-shadow:var(--shadow);position:relative;overflow:hidden;
+  }
+  header.hero::before,header.hero::after{content:"";position:absolute;border-radius:50%;background:rgba(255,255,255,.13)}
+  header.hero::before{width:180px;height:180px;top:-60px;right:-40px}
+  header.hero::after{width:120px;height:120px;bottom:-50px;left:-30px}
+  .hero h1{font-size:1.9rem;font-weight:700;text-shadow:0 2px 6px rgba(0,0,0,.18);position:relative}
+  .hero .sub{font-size:1.02rem;opacity:.96;margin-top:4px;position:relative}
+  .hero .chips{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:14px;position:relative}
+  .hero .chip{background:rgba(255,255,255,.22);backdrop-filter:blur(3px);padding:6px 13px;border-radius:20px;font-size:.9rem;font-weight:600;border:1px solid rgba(255,255,255,.35)}
+
+  /* ---------- TABS ---------- */
+  nav.tabs{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.86);backdrop-filter:blur(9px);
+    display:flex;gap:6px;overflow-x:auto;padding:9px 10px;margin:14px auto 22px;max-width:960px;
+    border-radius:16px;box-shadow:var(--shadow-sm);scrollbar-width:thin}
+  nav.tabs::-webkit-scrollbar{height:5px}
+  nav.tabs::-webkit-scrollbar-thumb{background:#ddd;border-radius:5px}
+  .tab-btn{white-space:nowrap;border:none;background:#f2eef8;color:var(--muted);font-family:'Mali',sans-serif;
+    font-size:.94rem;font-weight:600;padding:9px 15px;border-radius:12px;cursor:pointer;transition:.2s;flex:0 0 auto}
+  .tab-btn:hover{background:#eadff8}
+  .tab-btn.active{color:#fff;box-shadow:var(--shadow-sm);transform:translateY(-1px)}
+  .tab-btn[data-c="home"].active{background:linear-gradient(120deg,#a05cff,#ff4f9a)}
+  .tab-btn[data-c="repro"].active{background:linear-gradient(120deg,#ff4f9a,#a05cff)}
+  .tab-btn[data-c="blood"].active{background:linear-gradient(120deg,#ff5a5f,#ff9f43)}
+  .tab-btn[data-c="breath"].active{background:linear-gradient(120deg,#2aa9e0,#3ec46d)}
+  .tab-btn[data-c="relation"].active{background:linear-gradient(120deg,#3ec46d,#2aa9e0)}
+  .tab-btn[data-c="quiz"].active{background:linear-gradient(120deg,#ff9f43,#ff4f9a)}
+
+  section.page{display:none;animation:fade .35s ease}
+  section.page.show{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+  /* ---------- CARDS ---------- */
+  .card{background:var(--paper);border-radius:18px;padding:18px 18px;box-shadow:var(--shadow);margin-bottom:18px}
+  .card h2{font-size:1.35rem;display:flex;align-items:center;gap:9px;margin-bottom:6px}
+  .card h3{font-size:1.12rem;margin:14px 0 6px}
+  .lead{color:var(--muted);font-size:1rem}
+  .band{display:inline-block;font-family:'Mali',sans-serif;font-weight:700;color:#fff;padding:4px 14px;border-radius:30px;font-size:.95rem;margin-bottom:10px}
+  .b-pink{background:var(--pink)} .b-red{background:var(--red)} .b-blue{background:var(--blue)} .b-green{background:var(--green)} .b-purple{background:var(--purple)} .b-orange{background:var(--orange)}
+
+  .grid{display:grid;gap:12px}
+  .g2{grid-template-columns:1fr 1fr}
+  .g3{grid-template-columns:1fr 1fr 1fr}
+  @media(max-width:620px){.g2,.g3{grid-template-columns:1fr}}
+
+  .fact{border-radius:14px;padding:12px 14px;background:#faf8ff;border:1.5px solid #eee}
+  .fact .t{font-weight:700;font-family:'Mali',sans-serif;display:flex;align-items:center;gap:7px;margin-bottom:2px}
+  .fact .d{font-size:.95rem;color:#4a4560}
+  .fact.pink{background:var(--pink-soft);border-color:#ffc9e2}
+  .fact.red{background:var(--red-soft);border-color:#ffc9c9}
+  .fact.blue{background:var(--blue-soft);border-color:#bfe6f8}
+  .fact.green{background:var(--green-soft);border-color:#bfeecf}
+  .fact.purple{background:var(--purple-soft);border-color:#dcc9ff}
+  .fact.yellow{background:#fff7d6;border-color:#ffe98a}
+
+  /* remember box */
+  .remember{background:linear-gradient(120deg,#fff7d6,#ffe9c9);border:2px dashed var(--orange);
+    border-radius:16px;padding:14px 16px;margin:14px 0}
+  .remember .tt{font-family:'Mali',sans-serif;font-weight:700;color:#d97706;display:flex;align-items:center;gap:8px;margin-bottom:6px;font-size:1.05rem}
+  .remember ul{margin-left:20px}
+  .remember li{margin:3px 0}
+  .remember b{color:var(--red-deep)}
+
+  /* ---------- MIND MAP ---------- */
+  .mindmap{text-align:center;padding:6px 0 2px}
+  .mm-center{display:inline-block;font-family:'Mali',sans-serif;font-weight:700;color:#fff;
+    padding:12px 22px;border-radius:40px;font-size:1.15rem;box-shadow:var(--shadow);margin-bottom:6px}
+  .mm-branches{display:grid;gap:10px;margin-top:12px}
+  .mm-node{border-radius:14px;padding:11px 13px;text-align:left;box-shadow:var(--shadow-sm);position:relative}
+  .mm-node .h{font-family:'Mali',sans-serif;font-weight:700;font-size:1.02rem;display:flex;align-items:center;gap:7px}
+  .mm-node .h .num{background:#fff;color:var(--ink);width:24px;height:24px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:.85rem;font-weight:700;flex:0 0 auto}
+  .mm-node ul{margin:5px 0 0 6px;list-style:none}
+  .mm-node li{font-size:.92rem;padding-left:16px;position:relative;margin:2px 0}
+  .mm-node li::before{content:"•";position:absolute;left:2px;font-weight:700}
+
+  /* ---------- DIAGRAMS ---------- */
+  .diagram{background:#fbfaff;border-radius:16px;padding:14px;margin:12px 0;text-align:center;border:1.5px solid #eee}
+  .diagram .cap{font-family:'Mali',sans-serif;font-weight:600;color:var(--muted);margin-top:6px;font-size:.95rem}
+  svg{max-width:100%;height:auto}
+
+  /* flow chips */
+  .flow{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:6px}
+  .flow .step{font-family:'Mali',sans-serif;font-weight:600;color:#fff;padding:8px 13px;border-radius:12px;font-size:.92rem;box-shadow:var(--shadow-sm)}
+  .flow .arrow{font-size:1.2rem;color:var(--muted);font-weight:700}
+
+  table.tb{width:100%;border-collapse:collapse;margin:8px 0;font-size:.93rem;overflow:hidden;border-radius:12px;box-shadow:var(--shadow-sm)}
+  table.tb th{background:var(--purple);color:#fff;padding:9px 8px;font-family:'Mali',sans-serif;font-weight:600}
+  table.tb td{padding:8px;border-bottom:1px solid #eee;background:#fff;vertical-align:top}
+  table.tb tr:nth-child(even) td{background:#faf8ff}
+  table.tb td:first-child{font-weight:700;color:var(--purple);white-space:nowrap}
+
+  .twocol{display:flex;gap:10px}
+  .twocol>div{flex:1;border-radius:14px;padding:12px}
+  .good{background:var(--green-soft);border:1.5px solid #bfeecf}
+  .bad{background:var(--red-soft);border:1.5px solid #ffc9c9}
+  .twocol .hh{font-family:'Mali',sans-serif;font-weight:700;margin-bottom:5px;display:flex;align-items:center;gap:6px}
+  .twocol ul{margin-left:18px;font-size:.92rem}
+  @media(max-width:560px){.twocol{flex-direction:column}}
+
+  /* ---------- QUIZ ---------- */
+  .quiz-top{background:linear-gradient(120deg,#ff9f43,#ff4f9a);color:#fff;border-radius:18px;padding:16px;text-align:center;box-shadow:var(--shadow);margin-bottom:16px}
+  .quiz-top h2{color:#fff;justify-content:center}
+  .score-bar{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:10px}
+  .score-pill{background:rgba(255,255,255,.22);border:1px solid rgba(255,255,255,.4);border-radius:20px;padding:6px 15px;font-weight:700;font-family:'Mali',sans-serif}
+  .filter{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin:0 0 16px}
+  .filter button{border:none;background:#f2eef8;color:var(--muted);font-family:'Mali',sans-serif;font-weight:600;
+    padding:7px 13px;border-radius:20px;cursor:pointer;transition:.2s;font-size:.9rem}
+  .filter button.on{background:var(--purple);color:#fff}
+
+  .q{background:#fff;border-radius:16px;padding:15px 15px 6px;box-shadow:var(--shadow-sm);margin-bottom:14px;border-left:6px solid var(--purple)}
+  .q .qhead{display:flex;gap:8px;margin-bottom:10px}
+  .q .qnum{background:var(--purple);color:#fff;min-width:28px;height:28px;border-radius:9px;display:inline-flex;align-items:center;justify-content:center;font-weight:700;font-family:'Mali',sans-serif;flex:0 0 auto;font-size:.9rem}
+  .q .qtag{font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:10px;color:#fff;align-self:flex-start}
+  .q .qtext{font-weight:600;font-size:1.03rem;margin-bottom:4px}
+  .opts{list-style:none}
+  .opt{border:1.8px solid #e9e4f2;border-radius:12px;padding:10px 13px;margin:8px 0;cursor:pointer;transition:.15s;
+    display:flex;align-items:center;gap:10px;font-size:.98rem;background:#fff}
+  .opt:hover{border-color:var(--purple);background:#faf7ff}
+  .opt .lbl{width:26px;height:26px;border-radius:50%;background:#f0ebfa;color:var(--purple);font-weight:700;
+    display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;font-family:'Mali',sans-serif;font-size:.9rem}
+  .opt.correct{border-color:var(--green);background:var(--green-soft)}
+  .opt.correct .lbl{background:var(--green);color:#fff}
+  .opt.wrong{border-color:var(--red);background:var(--red-soft)}
+  .opt.wrong .lbl{background:var(--red);color:#fff}
+  .opt.lock{cursor:default;pointer-events:none;opacity:.9}
+  .explain{background:#f4fbff;border:1.5px solid #cfeeff;border-radius:12px;padding:11px 13px;margin:4px 0 12px;font-size:.94rem;display:none}
+  .explain.show{display:block;animation:fade .3s}
+  .explain .ico{font-weight:700;color:var(--blue-deep);font-family:'Mali',sans-serif}
+  .qtag.repro{background:var(--pink)} .qtag.blood{background:var(--red)} .qtag.breath{background:var(--blue)} .qtag.relation{background:var(--green)}
+  .q.repro{border-left-color:var(--pink)} .q.blood{border-left-color:var(--red)} .q.breath{border-left-color:var(--blue)} .q.relation{border-left-color:var(--green)}
+  .q.repro .qnum{background:var(--pink)} .q.blood .qnum{background:var(--red)} .q.breath .qnum{background:var(--blue)} .q.relation .qnum{background:var(--green)}
+
+  .reset{display:block;margin:6px auto 0;background:var(--purple);color:#fff;border:none;font-family:'Mali',sans-serif;
+    font-weight:600;padding:10px 24px;border-radius:24px;cursor:pointer;font-size:1rem;box-shadow:var(--shadow-sm)}
+  .reset:hover{filter:brightness(1.07)}
+
+  footer{text-align:center;color:var(--muted);font-size:.86rem;padding:20px 10px}
+  .tip{font-size:.9rem;color:var(--muted);margin-top:2px}
+  .emoji-big{font-size:1.3rem}
+  .checklist{list-style:none}
+  .checklist li{padding:8px 10px;background:#faf8ff;border-radius:10px;margin:6px 0;display:flex;gap:9px;align-items:flex-start;font-size:.96rem}
+  .checklist li .c{color:var(--green);font-weight:700;flex:0 0 auto}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <h1>🩺 ติวสอบสุขศึกษา ป.6</h1>
+  <div class="sub">รวมเนื้อหา + Mind Map + ข้อสอบพร้อมเฉลย</div>
+  <div class="chips">
+    <span class="chip">⏰ 10:30 – 11:20 (50 นาที)</span>
+    <span class="chip">🫀 ระบบอวัยวะในร่างกาย</span>
+    <span class="chip">🤝 สัมพันธภาพกับผู้อื่น</span>
+  </div>
+</header>
+
+<nav class="tabs" id="tabs">
+  <button class="tab-btn active" data-c="home">🏠 หน้าหลัก</button>
+  <button class="tab-btn" data-c="repro">♻️ ระบบสืบพันธุ์</button>
+  <button class="tab-btn" data-c="blood">🫀 ไหลเวียนโลหิต</button>
+  <button class="tab-btn" data-c="breath">🫁 ระบบหายใจ</button>
+  <button class="tab-btn" data-c="relation">🤝 สัมพันธภาพ</button>
+  <button class="tab-btn" data-c="quiz">✏️ ทำข้อสอบ</button>
+</nav>
+
+<div class="wrap">
+
+<!-- ============ HOME ============ -->
+<section class="page show" data-p="home">
+  <div class="card">
+    <span class="band b-purple">อ่านก่อนเริ่ม</span>
+    <h2>👋 สวัสดีจ้า มาเตรียมสอบกัน!</h2>
+    <p class="lead">เพจนี้สรุปเนื้อหาวิชาสุขศึกษา ป.6 ที่จะออกสอบ แบ่งเป็น <b>2 เรื่องใหญ่</b> พร้อม Mind Map ช่วยจำ และข้อสอบให้ลองทำเองพร้อมเฉลยอธิบายทุกข้อ</p>
+
+    <div class="grid g2" style="margin-top:14px">
+      <div class="fact pink"><div class="t">🫀 เรื่องที่ 1 · ระบบอวัยวะในร่างกาย</div><div class="d">ระบบสืบพันธุ์ · ระบบไหลเวียนโลหิต · ระบบหายใจ (หน้าที่ + วิธีดูแล)</div></div>
+      <div class="fact green"><div class="t">🤝 เรื่องที่ 2 · สัมพันธภาพกับผู้อื่น</div><div class="d">สร้างสัมพันธภาพกับครอบครัว · เพื่อน · บุคคลอื่น + การทำงานร่วมกัน</div></div>
+    </div>
+
+    <h3>📌 วิธีใช้เพจนี้</h3>
+    <ul class="checklist">
+      <li><span class="c">1️⃣</span><span>กดแท็บด้านบนเพื่ออ่าน <b>สรุปเนื้อหา + Mind Map</b> ทีละเรื่อง</span></li>
+      <li><span class="c">2️⃣</span><span>ดูกล่องสีเหลือง <b>“จำให้แม่น”</b> — เป็นจุดที่ออกสอบบ่อยที่สุด</span></li>
+      <li><span class="c">3️⃣</span><span>ไปแท็บ <b>✏️ ทำข้อสอบ</b> ลองทำเอง กดเลือกคำตอบแล้วจะเฉลยทันที</span></li>
+      <li><span class="c">4️⃣</span><span>ข้อไหนผิด อ่านคำอธิบายให้เข้าใจ แล้วกลับไปทบทวน</span></li>
+    </ul>
+
+    <div class="remember">
+      <div class="tt">🎯 เป้าหมายวันนี้</div>
+      <ul>
+        <li>จำ <b>หน้าที่ของอวัยวะ</b> แต่ละอย่างให้ได้ (ใครทำอะไร)</li>
+        <li>จำ <b>ลำดับการไหลเวียนเลือด</b> และ <b>ทางเดินอากาศหายใจ</b></li>
+        <li>แยกได้ว่าพฤติกรรมไหน <b>สร้าง</b> / <b>ไม่สร้าง</b> สัมพันธภาพที่ดี</li>
+      </ul>
+    </div>
+    <p class="tip">💗 สู้ ๆ นะลูก ทำได้แน่นอน! (เพจนี้เปิดในมือถือ/แท็บเล็ต/คอมฯ ได้หมด)</p>
+  </div>
+</section>
+
+<!-- ============ REPRODUCTIVE ============ -->
+<section class="page" data-p="repro">
+  <div class="card">
+    <span class="band b-pink">ระบบที่ 1</span>
+    <h2>♻️ ระบบสืบพันธุ์</h2>
+    <p class="lead"><b>ความสำคัญ:</b> ช่วยให้มนุษย์ <b>สืบพันธุ์ให้เกิดลูกหลาน</b> ดำรงเผ่าพันธุ์ต่อไป และ <b>ถ่ายทอดลักษณะทางพันธุกรรม</b> จากพ่อแม่สู่ลูก (เช่น สีผิว สีตา สีผม)</p>
+
+    <div class="mindmap">
+      <div class="mm-center" style="background:linear-gradient(120deg,#ff4f9a,#a05cff)">♻️ ระบบสืบพันธุ์</div>
+      <div class="mm-branches g2">
+        <div class="mm-node" style="background:var(--blue-soft)">
+          <div class="h"><span class="num">♂</span> เพศชาย</div>
+          <ul>
+            <li><b>อัณฑะ</b> – ผลิตอสุจิ + ฮอร์โมนเพศชาย</li>
+            <li><b>หลอดเก็บอสุจิ</b> – เก็บอสุจิ</li>
+            <li><b>ท่อนำอสุจิ</b> – ทางผ่านอสุจิ</li>
+            <li><b>ต่อมลูกหมาก</b> – สารช่วยอสุจิเคลื่อนที่</li>
+            <li><b>องคชาต</b> – ทางออกของอสุจิ</li>
+          </ul>
+        </div>
+        <div class="mm-node" style="background:var(--pink-soft)">
+          <div class="h"><span class="num">♀</span> เพศหญิง</div>
+          <ul>
+            <li><b>รังไข่</b> – ผลิตไข่ + ฮอร์โมนเพศหญิง</li>
+            <li><b>ท่อนำไข่</b> – ทางผ่านของไข่</li>
+            <li><b>มดลูก</b> – ที่เจริญเติบโตของทารก</li>
+            <li><b>ปากมดลูก</b> – คุมการผ่านของอสุจิ</li>
+            <li><b>ช่องคลอด</b> – ทางออกประจำเดือน/ทารก</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <h3>⚙️ การทำงาน &amp; การปฏิสนธิ</h3>
+    <div class="grid g2">
+      <div class="fact blue"><div class="t">♂ เพศชาย</div><div class="d">เข้าวัยรุ่น อัณฑะผลิต <b>อสุจิ</b> จำนวนมาก ร่างกายหลั่งออกตอนหลับ เรียกว่า <b>ฝันเปียก</b></div></div>
+      <div class="fact pink"><div class="t">♀ เพศหญิง</div><div class="d">เข้าวัยรุ่น รังไข่ผลิต <b>ไข่</b> ทุก <b>28–30 วัน</b> ถ้าไม่ผสม ไข่จะฝ่อและลอกออกเป็น <b>ประจำเดือน</b></div></div>
+    </div>
+    <div class="diagram">
+      <div class="flow">
+        <span class="step" style="background:var(--pink)">อสุจิ + ไข่</span>
+        <span class="arrow">→</span>
+        <span class="step" style="background:var(--purple)">ปฏิสนธิ (ตัวอ่อน)</span>
+        <span class="arrow">→</span>
+        <span class="step" style="background:var(--blue)">ฝังตัวที่ผนังมดลูก</span>
+        <span class="arrow">→</span>
+        <span class="step" style="background:var(--green)">โต 9 เดือน → คลอดเป็นทารก</span>
+      </div>
+      <div class="cap">🍼 ขั้นตอนการปฏิสนธิ → คลอด</div>
+    </div>
+
+    <div class="remember">
+      <div class="tt">🎯 จำให้แม่น (ออกสอบบ่อย!)</div>
+      <ul>
+        <li>เซลล์สืบพันธุ์เพศชาย = <b>ตัวอสุจิ</b> · เพศหญิง = <b>ไข่</b></li>
+        <li><b>ปฏิสนธิ</b> = ตัวอสุจิของเพศชาย <b>ผสมกับ</b> ไข่ของเพศหญิง</li>
+        <li>ตัวอ่อนฝังที่ <b>ผนังมดลูก</b> เจริญเติบโต <b>9 เดือน</b> จึงคลอด</li>
+        <li>ฮอร์โมนเพศชาย = <b>เทสโทสเตอโรน</b> · เพศหญิง = <b>เอสโตรเจน &amp; โปรเจสเตอโรน</b></li>
+      </ul>
+    </div>
+
+    <h3>🧼 วิธีดูแลระบบสืบพันธุ์</h3>
+    <div class="grid g2">
+      <div class="fact green"><div class="d">✔ ทำความสะอาดอวัยวะเพศทุกครั้งหลังอาบน้ำ/ขับถ่าย แล้วซับให้แห้ง</div></div>
+      <div class="fact green"><div class="d">✔ สวมชุดชั้นในที่สะอาด แห้ง ไม่รัดแน่นเกินไป</div></div>
+      <div class="fact green"><div class="d">✔ ไม่มีเพศสัมพันธ์ในวัยเรียน · ระวังไม่ให้ถูกกระแทก</div></div>
+      <div class="fact green"><div class="d">✔ เพศหญิงเมื่อมีประจำเดือน เปลี่ยนผ้าอนามัยทุก <b>3–4 ชั่วโมง</b></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BLOOD ============ -->
+<section class="page" data-p="blood">
+  <div class="card">
+    <span class="band b-red">ระบบที่ 2</span>
+    <h2>🫀 ระบบไหลเวียนโลหิต</h2>
+    <p class="lead"><b>ความสำคัญ:</b> ลำเลียง <b>น้ำ สารอาหาร แก๊สออกซิเจน</b> และสารต่าง ๆ ไปเลี้ยงส่วนต่าง ๆ ของร่างกาย</p>
+
+    <div class="mindmap">
+      <div class="mm-center" style="background:linear-gradient(120deg,#ff5a5f,#ff9f43)">🫀 ไหลเวียนโลหิต</div>
+      <div class="mm-branches g3">
+        <div class="mm-node" style="background:var(--red-soft)">
+          <div class="h">❤️ หัวใจ</div>
+          <ul><li>สูบฉีดเลือด</li><li>มี <b>4 ห้อง</b> (บน-ล่าง / ซ้าย-ขวา)</li><li>มีลิ้นหัวใจกั้นแต่ละห้อง</li></ul>
+        </div>
+        <div class="mm-node" style="background:#fff0e6">
+          <div class="h">🩸 เลือด</div>
+          <ul><li>เม็ดเลือดแดง</li><li>เม็ดเลือดขาว</li><li>เกล็ดเลือด</li><li>น้ำเลือด (พลาสมา)</li></ul>
+        </div>
+        <div class="mm-node" style="background:var(--pink-soft)">
+          <div class="h">🧵 หลอดเลือด</div>
+          <ul><li>แดง (ผนังหนาสุด)</li><li>ดำ</li><li>ฝอย (เล็กสุด)</li></ul>
+        </div>
+      </div>
+    </div>
+
+    <h3>🩸 ส่วนประกอบของเลือด</h3>
+    <table class="tb">
+      <tr><th>ส่วนประกอบ</th><th>หน้าที่</th></tr>
+      <tr><td>เม็ดเลือดแดง</td><td>มีมากที่สุด มี <b>เฮโมโกลบิน</b> (โปรตีน+ธาตุเหล็ก) รับ <b>O₂</b> จากปอดไปเลี้ยงร่างกาย นำ <b>CO₂</b> กลับไปฟอกที่ปอด</td></tr>
+      <tr><td>เม็ดเลือดขาว</td><td>ใหญ่กว่าเม็ดเลือดแดง <b>กำจัดเชื้อโรค</b> สร้างภูมิต้านทาน</td></tr>
+      <tr><td>เกล็ดเลือด</td><td>ช่วยให้ <b>เลือดแข็งตัว</b> และหยุดไหลเมื่อเป็นแผล</td></tr>
+      <tr><td>น้ำเลือด (พลาสมา)</td><td>สีเหลืองอ่อน <b>ลำเลียงสาร</b> ต่าง ๆ ไปตามร่างกาย</td></tr>
+    </table>
+
+    <h3>🧵 หลอดเลือด 3 ชนิด</h3>
+    <div class="grid g3">
+      <div class="fact red"><div class="t">แดง</div><div class="d">ผนัง <b>หนาที่สุด</b> นำ <b>เลือดดี</b> ออกจากหัวใจไปเลี้ยงร่างกาย</div></div>
+      <div class="fact blue"><div class="t">ดำ</div><div class="d">รับ <b>เลือดเสีย</b> กลับเข้าหัวใจ เพื่อส่งไปฟอกที่ปอด</div></div>
+      <div class="fact pink"><div class="t">ฝอย</div><div class="d"><b>เล็กที่สุด</b> เชื่อมแดงกับดำ แลกเปลี่ยนสารกับเซลล์</div></div>
+    </div>
+
+    <h3>🔄 การไหลเวียนเลือดผ่านหัวใจ 4 ห้อง</h3>
+    <div class="diagram">
+      <svg viewBox="0 0 640 300" role="img" aria-label="แผนภาพการไหลเวียนเลือด">
+        <!-- lungs -->
+        <ellipse cx="70" cy="150" rx="46" ry="60" fill="#ffd1d6" stroke="#ff8a95" stroke-width="2"/>
+        <text x="70" y="150" text-anchor="middle" font-family="Mali" font-size="18" fill="#c0392b" font-weight="700">ปอด</text>
+        <text x="70" y="230" text-anchor="middle" font-family="Sarabun" font-size="12" fill="#7a5">ฟอกเลือดเสีย→ดี</text>
+        <!-- heart 4 chambers -->
+        <rect x="230" y="55" width="180" height="190" rx="20" fill="#fff" stroke="#ff5a5f" stroke-width="2.5"/>
+        <line x1="320" y1="55" x2="320" y2="245" stroke="#ffb3b7" stroke-width="2"/>
+        <line x1="230" y1="150" x2="410" y2="150" stroke="#ffb3b7" stroke-width="2"/>
+        <text x="275" y="95" text-anchor="middle" font-family="Mali" font-size="12.5" fill="#c0392b" font-weight="700">บนซ้าย</text>
+        <text x="365" y="95" text-anchor="middle" font-family="Mali" font-size="12.5" fill="#1673a8" font-weight="700">บนขวา</text>
+        <text x="275" y="200" text-anchor="middle" font-family="Mali" font-size="12.5" fill="#c0392b" font-weight="700">ล่างซ้าย</text>
+        <text x="365" y="200" text-anchor="middle" font-family="Mali" font-size="12.5" fill="#1673a8" font-weight="700">ล่างขวา</text>
+        <text x="320" y="40" text-anchor="middle" font-family="Mali" font-size="15" fill="#2b2340" font-weight="700">❤️ หัวใจ</text>
+        <!-- body -->
+        <rect x="520" y="70" width="90" height="160" rx="18" fill="#ffe3b0" stroke="#ff9f43" stroke-width="2"/>
+        <text x="565" y="145" text-anchor="middle" font-family="Mali" font-size="16" fill="#b9770f" font-weight="700">ร่างกาย</text>
+        <text x="565" y="170" text-anchor="middle" font-family="Sarabun" font-size="11" fill="#b9770f">ใช้เลือดดี</text>
+        <!-- arrows good (red) -->
+        <path d="M116 120 Q175 80 228 90" fill="none" stroke="#ff5a5f" stroke-width="3" marker-end="url(#ar)"/>
+        <path d="M275 150 L275 168" stroke="#ff5a5f" stroke-width="3" marker-end="url(#ar)"/>
+        <path d="M412 200 Q470 215 518 190" fill="none" stroke="#ff5a5f" stroke-width="3" marker-end="url(#ar)"/>
+        <!-- arrows bad (blue) -->
+        <path d="M520 110 Q470 80 412 95" fill="none" stroke="#2aa9e0" stroke-width="3" marker-end="url(#ab)"/>
+        <path d="M365 150 L365 168" stroke="#2aa9e0" stroke-width="3" marker-end="url(#ab)"/>
+        <path d="M228 205 Q160 230 116 180" fill="none" stroke="#2aa9e0" stroke-width="3" marker-end="url(#ab)"/>
+        <defs>
+          <marker id="ar" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#ff5a5f"/></marker>
+          <marker id="ab" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#2aa9e0"/></marker>
+        </defs>
+      </svg>
+      <div class="cap"><span style="color:var(--red-deep)">▬ เลือดดี (มี O₂)</span> &nbsp; <span style="color:var(--blue-deep)">▬ เลือดเสีย (มี CO₂)</span></div>
+    </div>
+    <div class="diagram" style="background:#fff5f5">
+      <div class="flow">
+        <span class="step" style="background:var(--red)">ปอด</span><span class="arrow">→</span>
+        <span class="step" style="background:var(--red)">บนซ้าย</span><span class="arrow">→</span>
+        <span class="step" style="background:var(--red)">ล่างซ้าย</span><span class="arrow">→</span>
+        <span class="step" style="background:var(--orange)">ร่างกาย</span><span class="arrow">→</span>
+        <span class="step" style="background:var(--blue)">บนขวา</span><span class="arrow">→</span>
+        <span class="step" style="background:var(--blue)">ล่างขวา</span><span class="arrow">↺</span>
+      </div>
+      <div class="cap">🔁 ท่องเป็นวงกลม: ปอด → ซ้าย(บน→ล่าง) → ร่างกาย → ขวา(บน→ล่าง) → ปอด</div>
+    </div>
+
+    <div class="remember">
+      <div class="tt">🎯 จำให้แม่น (ออกสอบบ่อย!)</div>
+      <ul>
+        <li>เลือดจาก <b>ปอด → หัวใจห้องบนซ้าย</b> เป็น <b>เลือดดี มี O₂ มาก</b></li>
+        <li>หลอดเลือด <b>แดง</b> = ผนังหนาสุด นำเลือดดีไปเลี้ยงร่างกาย</li>
+        <li>เม็ดเลือดแดงมี <b>เฮโมโกลบิน</b> (โปรตีน + ธาตุเหล็ก)</li>
+        <li>ดูแล: ออกกำลังกาย · ดื่มน้ำ 7–8 แก้ว/วัน · <b>เลี่ยงอาหารไขมัน</b> (กันหลอดเลือดอุดตัน)</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BREATH ============ -->
+<section class="page" data-p="breath">
+  <div class="card">
+    <span class="band b-blue">ระบบที่ 3</span>
+    <h2>🫁 ระบบหายใจ</h2>
+    <p class="lead"><b>ความสำคัญ:</b> แลกเปลี่ยนแก๊ส — หายใจเข้ารับ <b>O₂</b> หายใจออกขับ <b>CO₂</b> · ถ้าสมองขาด O₂ เกิน <b>4 นาที สมองจะตาย</b></p>
+
+    <div class="mindmap">
+      <div class="mm-center" style="background:linear-gradient(120deg,#2aa9e0,#3ec46d)">🫁 ระบบหายใจ</div>
+    </div>
+    <div class="diagram" style="background:#f0fbff">
+      <div class="flow">
+        <span class="step" style="background:var(--blue)">👃 จมูก</span><span class="arrow">→</span>
+        <span class="step" style="background:var(--blue)">หลอดลม</span><span class="arrow">→</span>
+        <span class="step" style="background:var(--green)">ปอด</span><span class="arrow">→</span>
+        <span class="step" style="background:var(--green)">หลอดลมฝอย</span><span class="arrow">→</span>
+        <span class="step" style="background:var(--purple)">ถุงลม</span>
+      </div>
+      <div class="cap">➡️ ทางเดินอากาศ: จมูก → หลอดลม → ปอด → หลอดลมฝอย → ถุงลม (แลกเปลี่ยนแก๊ส)</div>
+    </div>
+
+    <h3>🔎 อวัยวะและหน้าที่</h3>
+    <div class="grid g2">
+      <div class="fact blue"><div class="t">👃 จมูก</div><div class="d">มี <b>ขนจมูก + เยื่อเมือก</b> กรองและดักจับฝุ่น · มีเซลล์รับกลิ่น</div></div>
+      <div class="fact blue"><div class="t">🌬️ หลอดลม</div><div class="d">ทางผ่านอากาศเข้าสู่ปอด และดักฝุ่นไม่ให้เข้าปอด</div></div>
+      <div class="fact green"><div class="t">🫁 ปอด</div><div class="d">มี 2 ข้าง รองรับอากาศเข้าสู่หลอดลมฝอยและถุงลม</div></div>
+      <div class="fact green"><div class="t">🌿 หลอดลมฝอย</div><div class="d">แตกแขนงในปอด ลำเลียง/กระจายอากาศเข้าสู่ถุงลม</div></div>
+      <div class="fact purple"><div class="t">🫧 ถุงลม</div><div class="d"><b>แลกเปลี่ยนแก๊ส O₂ กับ CO₂</b> ระหว่างปอดกับเลือด</div></div>
+      <div class="fact yellow"><div class="t">⬇️ กะบังลม</div><div class="d">กล้ามเนื้อควบคุมลมเข้า-ออก · หายใจเข้า→ <b>หดตัว/ต่ำลง</b> · หายใจออก→ <b>คลายตัว/ยกขึ้น</b></div></div>
+    </div>
+
+    <h3>🌬️ กลไกการหายใจ</h3>
+    <div class="twocol">
+      <div class="good">
+        <div class="hh">🔵 หายใจเข้า</div>
+        <ul><li>ซี่โครง <b>ยกตัวสูงขึ้น</b></li><li>กะบังลม <b>หดตัว</b> (เลื่อนต่ำลง)</li><li>รับ <b>O₂</b> เข้า</li></ul>
+      </div>
+      <div class="bad" style="background:#e8f4ff;border-color:#bfe0ff">
+        <div class="hh">🟠 หายใจออก</div>
+        <ul><li>ซี่โครง <b>หดตัวลง</b></li><li>กะบังลม <b>คลายตัว</b> (ยกขึ้น)</li><li>ขับ <b>CO₂</b> ออก</li></ul>
+      </div>
+    </div>
+
+    <div class="remember">
+      <div class="tt">🎯 จำให้แม่น (ออกสอบบ่อย!)</div>
+      <ul>
+        <li>หายใจ <b>เข้า</b> รับ <b>ออกซิเจน (O₂)</b> · หายใจ <b>ออก</b> ขับ <b>คาร์บอนไดออกไซด์ (CO₂)</b></li>
+        <li>ที่ <b>แลกเปลี่ยนแก๊ส</b> คือ <b>ถุงลม</b> ในปอด</li>
+        <li>สมองขาด O₂ เกิน <b>4 นาที → ตาย</b></li>
+        <li>ดูแล: อยู่ที่ <b>อากาศบริสุทธิ์</b> · ใส่หน้ากากเมื่อฝุ่นเยอะ/เป็นหวัด</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ RELATION ============ -->
+<section class="page" data-p="relation">
+  <div class="card">
+    <span class="band b-green">เรื่องที่ 2</span>
+    <h2>🤝 การสร้างและรักษาสัมพันธภาพกับผู้อื่น</h2>
+    <p class="lead"><b>สัมพันธภาพ</b> = ความสัมพันธ์ระหว่างคน <b>2 คนหรือมากกว่า</b> ที่มีปฏิสัมพันธ์กันจน <b>เข้าใจกัน เป็นมิตร</b> และส่งผลดีต่อกัน → ช่วยให้อยู่ร่วมกันในสังคม <b>อย่างมีความสุข</b></p>
+
+    <div class="mindmap">
+      <div class="mm-center" style="background:linear-gradient(120deg,#3ec46d,#2aa9e0)">🤝 สัมพันธภาพ</div>
+      <div class="mm-branches g3">
+        <div class="mm-node" style="background:var(--pink-soft)">
+          <div class="h">👨‍👩‍👧 ครอบครัว</div>
+          <ul><li>ช่วยงานบ้าน</li><li>ใช้เวลาร่วมกัน</li><li>พูดเพราะ เชื่อฟังผู้ใหญ่</li><li>แบ่งปัน ให้อภัย</li></ul>
+        </div>
+        <div class="mm-node" style="background:var(--blue-soft)">
+          <div class="h">🧑‍🤝‍🧑 เพื่อน</div>
+          <ul><li>ยิ้มแย้ม พูดดี</li><li>ช่วยเมื่อเดือดร้อน</li><li>ไม่รังแก/ล้อเลียน</li><li>รับผิดชอบงานกลุ่ม</li></ul>
+        </div>
+        <div class="mm-node" style="background:var(--green-soft)">
+          <div class="h">🧑 บุคคลอื่น</div>
+          <ul><li>ทักทาย ยิ้มให้</li><li>สุภาพ เกรงใจ</li><li>ช่วยเหลือ ไม่เห็นแก่ตัว</li><li>พูด “ขอบคุณ/ขอโทษ”</li></ul>
+        </div>
+      </div>
+    </div>
+
+    <h3>✅ / ❌ แยกให้ออก</h3>
+    <div class="twocol">
+      <div class="good">
+        <div class="hh">✅ สร้างสัมพันธภาพที่ดี</div>
+        <ul>
+          <li>ช่วยผู้ปกครองทำงานบ้าน</li>
+          <li>พูดจาไพเราะ ให้กำลังใจเพื่อน</li>
+          <li>ช่วยผู้สูงอายุถือของหนัก</li>
+          <li>ยิ้มทักทายตอบ · กล่าวขอบคุณ/ขอโทษ</li>
+        </ul>
+      </div>
+      <div class="bad">
+        <div class="hh">❌ ไม่สร้างสัมพันธภาพ</div>
+        <ul>
+          <li>ยืมของเพื่อนแล้วไม่คืน</li>
+          <li>ล้อเลียน/รังแกเพื่อนเมื่อสอบตก</li>
+          <li>ทำหน้าบึ้งใส่คนรอบข้าง</li>
+          <li>พูดหยาบคาย ไม่ขอบคุณ</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>👍 ปัจจัยที่ช่วยให้ “ทำงานร่วมกัน” สำเร็จ</h3>
+    <div class="grid g2">
+      <div class="fact green"><div class="t">1) สร้างสัมพันธภาพที่ดี</div><div class="d">สมาชิกในกลุ่มสนิทและเข้าใจกัน</div></div>
+      <div class="fact green"><div class="t">2) ความสามารถส่วนบุคคล</div><div class="d">แต่ละคนเก่งคนละด้าน ทำให้งานสำเร็จเร็ว</div></div>
+      <div class="fact green"><div class="t">3) ยอมรับความคิดเห็น/ความต่าง</div><div class="d">ตกลงกันแบบประชาธิปไตย ไม่ดูถูกกัน</div></div>
+      <div class="fact green"><div class="t">4) บทบาทหน้าที่ &amp; ความรับผิดชอบ</div><div class="d">แบ่งงานตามความถนัด สามัคคีช่วยกัน</div></div>
+    </div>
+
+    <div class="remember">
+      <div class="tt">🎯 จำให้แม่น (ออกสอบบ่อย!)</div>
+      <ul>
+        <li>สัมพันธภาพ = คน <b>2 คนขึ้นไป</b> เข้าใจกัน เป็นมิตร</li>
+        <li>ผลของสัมพันธภาพที่ดี = <b>อยู่ร่วมกันในสังคมอย่างมีความสุข</b> / สุขภาพจิตดี</li>
+        <li>คุณธรรมที่ทำให้ทำงานกลุ่มสำเร็จ = <b>ความรับผิดชอบ</b></li>
+        <li>ใครยิ้มให้ → <b>ยิ้มทักทายตอบ</b> (ไม่ทำหน้าบึ้ง/พูดหยาบ)</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ QUIZ ============ -->
+<section class="page" data-p="quiz">
+  <div class="quiz-top">
+    <h2>✏️ แบบทดสอบพร้อมเฉลย</h2>
+    <p style="opacity:.95">กดเลือกคำตอบที่คิดว่าถูก แล้วระบบจะเฉลย + อธิบายให้ทันที 💡</p>
+    <div class="score-bar">
+      <span class="score-pill">✅ ถูก: <span id="sc-right">0</span></span>
+      <span class="score-pill">❌ ผิด: <span id="sc-wrong">0</span></span>
+      <span class="score-pill">📊 ทำแล้ว: <span id="sc-done">0</span>/<span id="sc-total">0</span></span>
+    </div>
+  </div>
+
+  <div class="filter" id="filter">
+    <button class="on" data-f="all">📚 ทั้งหมด</button>
+    <button data-f="repro">♻️ สืบพันธุ์</button>
+    <button data-f="blood">🫀 ไหลเวียนโลหิต</button>
+    <button data-f="breath">🫁 หายใจ</button>
+    <button data-f="relation">🤝 สัมพันธภาพ</button>
+  </div>
+
+  <div id="quizbox"></div>
+  <button class="reset" id="resetBtn">🔄 เริ่มทำใหม่ทั้งหมด</button>
+</section>
+
+</div>
+
+<footer>
+  📖 สรุปจากหนังสือเรียนสุขศึกษา ป.6 (หน่วยที่ 1–2) · ทำขึ้นเพื่อติวสอบ 💗<br>
+  ขอให้ลูกสอบผ่านฉลุยนะจ๊ะ 🌟
+</footer>
+
+<script>
+/* ---------- TABS ---------- */
+const tabBtns=document.querySelectorAll('.tab-btn');
+const pages=document.querySelectorAll('.page');
+tabBtns.forEach(b=>b.addEventListener('click',()=>{
+  tabBtns.forEach(x=>x.classList.remove('active'));
+  b.classList.add('active');
+  const c=b.dataset.c;
+  pages.forEach(p=>p.classList.toggle('show',p.dataset.p===c));
+  window.scrollTo({top:0,behavior:'smooth'});
+}));
+
+/* ---------- QUIZ DATA ---------- */
+const CAT={repro:'♻️ สืบพันธุ์',blood:'🫀 ไหลเวียน',breath:'🫁 หายใจ',relation:'🤝 สัมพันธภาพ'};
+const Q=[
+ // ---- REPRO ----
+ {c:'repro',q:'ข้อใดเป็นความสำคัญในการสืบพันธุ์ของมนุษย์',o:['เกิดความหลากหลายทางชีวภาพ','สามารถดำรงเผ่าพันธุ์เอาไว้ได้ต่อไป','ประชากรมากขึ้นทำให้มีแรงงานมากขึ้น','เกิดพันธุกรรมที่ดี ไม่มีโรคทางพันธุกรรม'],a:1,
+  e:'ระบบสืบพันธุ์ช่วยให้เกิดลูกหลาน เพื่อ “ดำรงเผ่าพันธุ์” ของมนุษย์ให้คงอยู่ต่อไป และถ่ายทอดลักษณะทางพันธุกรรมจากพ่อแม่สู่ลูก'},
+ {c:'repro',q:'ข้อใดสรุปถูกต้องเกี่ยวกับการปฏิสนธิ',o:['อัณฑะของเพศชายและรังไข่ของเพศหญิงผสมกัน','รังไข่ของเพศชายผสมกับตัวอสุจิของเพศหญิง','ไข่ของเพศชายผสมกับตัวอสุจิของเพศหญิง','ตัวอสุจิของเพศชายผสมกับไข่ของเพศหญิง'],a:3,
+  e:'ปฏิสนธิ = “ตัวอสุจิ” (เพศชาย) เข้าผสมกับ “ไข่” (เพศหญิง) จำง่าย ๆ ว่า ชายมีอสุจิ หญิงมีไข่'},
+ {c:'repro',q:'เซลล์สืบพันธุ์เพศชาย คืออะไร',o:['ไข่','ตัวอสุจิ','ฮอร์โมน','ตัวอ่อน'],a:1,
+  e:'เซลล์สืบพันธุ์เพศชาย = ตัวอสุจิ (สร้างจากอัณฑะ) ส่วนเซลล์สืบพันธุ์เพศหญิง = ไข่ (สร้างจากรังไข่)'},
+ {c:'repro',q:'อวัยวะใดทำหน้าที่ผลิตไข่และฮอร์โมนเพศหญิง',o:['มดลูก','ท่อนำไข่','รังไข่','ช่องคลอด'],a:2,
+  e:'รังไข่ (มี 2 ข้าง) ผลิตไข่ที่ใช้ปฏิสนธิ และผลิตฮอร์โมนเพศหญิง'},
+ {c:'repro',q:'อวัยวะใดทำหน้าที่รองรับการเจริญเติบโตของทารก',o:['รังไข่','มดลูก','ท่อนำไข่','ปากมดลูก'],a:1,
+  e:'มดลูก คือที่ที่ตัวอ่อนฝังตัวและเจริญเติบโตเป็นทารกจนครบ 9 เดือน'},
+ {c:'repro',q:'เมื่อไข่ไม่ได้รับการผสม เยื่อบุผนังมดลูกจะลอกและขับออกทางช่องคลอด เรียกว่าอะไร',o:['การปฏิสนธิ','ฝันเปียก','ประจำเดือน','การตกไข่'],a:2,
+  e:'เมื่อไข่ไม่ผสม ไข่จะฝ่อ ผนังมดลูกที่เตรียมไว้จะลอกออกมาเป็น “ประจำเดือน” (ของเพศหญิง)'},
+ {c:'repro',q:'ตัวอ่อนฝังตัวที่ผนังมดลูกและเจริญเติบโตครบกี่เดือนจึงคลอด',o:['7 เดือน','9 เดือน','10 เดือน','12 เดือน'],a:1,
+  e:'หลังปฏิสนธิ ตัวอ่อนฝังที่ผนังมดลูกและโตจนครบ 9 เดือน จึงคลอดออกมาเป็นทารก'},
+ {c:'repro',q:'เรียงลำดับการสืบพันธุ์ของมนุษย์ข้อใดถูกต้อง',o:['มีเพศสัมพันธ์ → อสุจิผสมไข่ → ตัวอ่อนฝังผนังมดลูก → ตั้งครรภ์ 9 เดือน → คลอด','อสุจิผสมไข่ → มีเพศสัมพันธ์ → คลอด → ตั้งครรภ์','ตั้งครรภ์ → มีเพศสัมพันธ์ → คลอด → อสุจิผสมไข่','คลอด → ตั้งครรภ์ → อสุจิผสมไข่ → มีเพศสัมพันธ์'],a:0,
+  e:'ลำดับที่ถูกต้อง: มีเพศสัมพันธ์ → อสุจิผสมกับไข่ → ตัวอ่อนฝังที่ผนังมดลูก → ตั้งครรภ์ 9 เดือน → คลอดเป็นทารก'},
+ {c:'repro',q:'ฮอร์โมนเพศชาย คือฮอร์โมนใด',o:['เอสโตรเจน','โปรเจสเตอโรน','เทสโทสเตอโรน','อินซูลิน'],a:2,
+  e:'ฮอร์โมนเพศชาย = เทสโทสเตอโรน · ฮอร์โมนเพศหญิง = เอสโตรเจน และ โปรเจสเตอโรน'},
+ {c:'repro',q:'ข้อใดเป็นการดูแลระบบสืบพันธุ์ให้ทำงานเป็นปกติ',o:['ออกกำลังกายอย่างหักโหม','ทำความสะอาดอวัยวะเพศอย่างถูกต้อง','ใส่กางเกงในที่รัดแน่น ๆ','กลั้นปัสสาวะบ่อย ๆ'],a:1,
+  e:'ดูแลระบบสืบพันธุ์: ทำความสะอาดอวัยวะเพศให้ถูกต้องทุกครั้งหลังอาบน้ำ/ขับถ่าย ซับให้แห้ง และใส่ชุดชั้นในสะอาดไม่รัดแน่น'},
+
+ // ---- BLOOD ----
+ {c:'blood',q:'เลือดที่ถูกส่งจากปอดเข้าสู่หัวใจห้องบนซ้ายมีลักษณะอย่างไร',o:['เป็นเลือดดี มีแก๊สออกซิเจนมาก','เป็นเลือดเสีย มีแก๊สออกซิเจนมาก','เป็นเลือดดี มีแก๊สคาร์บอนไดออกไซด์มาก','เป็นเลือดเสีย มีแก๊สคาร์บอนไดออกไซด์มาก'],a:0,
+  e:'ปอดฟอกเลือดเสียให้เป็นเลือดดี แล้วส่งเข้าหัวใจห้องบนซ้าย จึงเป็น “เลือดดี มีออกซิเจนมาก”'},
+ {c:'blood',q:'ข้อใดเป็นหน้าที่สำคัญของหลอดเลือดแดง',o:['รับเลือดเสียไปให้หัวใจ','กรองอากาศบริสุทธิ์ไปยังปอด','ส่งเลือดดีไปเลี้ยงส่วนต่าง ๆ ของร่างกาย','ผลิตสารที่จำเป็นต่อการเจริญเติบโต'],a:2,
+  e:'หลอดเลือดแดงมีผนังหนาที่สุด นำ “เลือดดี” ออกจากหัวใจห้องล่างซ้ายไปเลี้ยงส่วนต่าง ๆ ของร่างกาย'},
+ {c:'blood',q:'เม็ดเลือดชนิดใดมีจำนวนมากที่สุดและมีเฮโมโกลบิน',o:['เม็ดเลือดขาว','เม็ดเลือดแดง','เกล็ดเลือด','น้ำเลือด'],a:1,
+  e:'เม็ดเลือดแดงมีมากที่สุด มีเฮโมโกลบิน (โปรตีน+ธาตุเหล็ก) ทำหน้าที่ลำเลียงออกซิเจน'},
+ {c:'blood',q:'เม็ดเลือดขาวทำหน้าที่อะไร',o:['ช่วยให้เลือดแข็งตัว','ลำเลียงออกซิเจน','กำจัดเชื้อโรค สร้างภูมิต้านทาน','ลำเลียงสารอาหาร'],a:2,
+  e:'เม็ดเลือดขาวมีขนาดใหญ่กว่าเม็ดเลือดแดง หน้าที่กำจัดเชื้อโรคและสร้างภูมิต้านทานให้ร่างกาย'},
+ {c:'blood',q:'เกล็ดเลือดทำหน้าที่อะไร',o:['กำจัดเชื้อโรค','ช่วยให้เลือดแข็งตัวเมื่อเกิดบาดแผล','ลำเลียงออกซิเจน','สร้างฮอร์โมน'],a:1,
+  e:'เกล็ดเลือดช่วยให้เลือดแข็งตัวและหยุดไหลเมื่อเกิดบาดแผล'},
+ {c:'blood',q:'หัวใจของคนเราแบ่งออกเป็นกี่ห้อง',o:['2 ห้อง','3 ห้อง','4 ห้อง','5 ห้อง'],a:2,
+  e:'หัวใจมี 4 ห้อง: บนซ้าย บนขวา ล่างซ้าย ล่างขวา แต่ละห้องมีลิ้นหัวใจกั้น'},
+ {c:'blood',q:'หลอดเลือดชนิดใดมีผนังหนาที่สุด',o:['หลอดเลือดฝอย','หลอดเลือดดำ','หลอดเลือดแดง','เท่ากันทุกชนิด'],a:2,
+  e:'หลอดเลือดแดงมีผนังหนาที่สุด เพราะต้องทนแรงดันเลือดที่ถูกสูบออกจากหัวใจ · ส่วนหลอดเลือดฝอยผนังบางที่สุด'},
+ {c:'blood',q:'น้ำเลือดหรือพลาสมามีลักษณะอย่างไร',o:['สีแดงเข้ม','สีเหลืองอ่อน','ใสไม่มีสี','สีขาวขุ่น'],a:1,
+  e:'น้ำเลือด (พลาสมา) เป็นของเหลวสีเหลืองอ่อน ทำหน้าที่ลำเลียงสารต่าง ๆ ไปตามอวัยวะของร่างกาย'},
+ {c:'blood',q:'ข้อใดเป็นการดูแลรักษาระบบไหลเวียนโลหิตได้เหมาะสมที่สุด',o:['เล่นอย่างระมัดระวัง','ทำจิตใจให้ร่าเริงแจ่มใส','หลีกเลี่ยงบริเวณที่มีฝุ่นละอองมาก','หลีกเลี่ยงอาหารไขมันมาก รับประทานอาหารที่มีประโยชน์'],a:3,
+  e:'ควรเลี่ยงอาหารไขมันสูง (กันหลอดเลือดอุดตัน) และกินอาหารบำรุงเลือด เช่น ตับ ไข่แดง ร่วมกับออกกำลังกายและดื่มน้ำ 7–8 แก้ว/วัน'},
+ {c:'blood',q:'เลือดเสียจากร่างกายจะถูกส่งไปฟอกให้เป็นเลือดดีที่อวัยวะใด',o:['ตับ','ไต','ปอด','กระเพาะ'],a:2,
+  e:'เลือดเสีย (มี CO₂) ถูกส่งกลับหัวใจห้องขวา แล้วส่งไปฟอกที่ “ปอด” ให้กลายเป็นเลือดดี (มี O₂)'},
+
+ // ---- BREATH ----
+ {c:'breath',q:'ข้อใดเป็นผลจากการขาดอากาศหายใจเป็นเวลานาน',o:['เสียชีวิต','เป็นหวัด','ปวดหัวเล็กน้อย','หิวข้าว'],a:0,
+  e:'ถ้าสมองขาดออกซิเจนเกิน 4 นาที สมองจะตาย ไม่สามารถสั่งการร่างกายได้ ทำให้เสียชีวิต'},
+ {c:'breath',q:'เราหายใจเข้าเพื่อรับแก๊สชนิดใดเข้าสู่ร่างกาย',o:['คาร์บอนไดออกไซด์','ไนโตรเจน','ออกซิเจน','ไฮโดรเจน'],a:2,
+  e:'หายใจเข้า = รับออกซิเจน (O₂) · หายใจออก = ขับคาร์บอนไดออกไซด์ (CO₂)'},
+ {c:'breath',q:'อวัยวะใดทำหน้าที่แลกเปลี่ยนแก๊สออกซิเจนกับคาร์บอนไดออกไซด์',o:['หลอดลม','จมูก','ถุงลม','กะบังลม'],a:2,
+  e:'ถุงลมในปอดเป็นจุดที่แลกเปลี่ยนแก๊ส O₂ กับ CO₂ ระหว่างปอดกับเลือด'},
+ {c:'breath',q:'ในจมูกมีอะไรทำหน้าที่กรองและดักจับฝุ่นละออง',o:['ถุงลม','ขนจมูกและเยื่อเมือก','กะบังลม','หลอดลมฝอย'],a:1,
+  e:'ในจมูกมีขนจมูกและเยื่อเมือก ช่วยกรองและดักจับฝุ่นละอองก่อนอากาศเข้าสู่ปอด'},
+ {c:'breath',q:'ขณะหายใจเข้า กะบังลมและซี่โครงมีการเปลี่ยนแปลงอย่างไร',o:['กะบังลมหดตัว/ต่ำลง ซี่โครงยกสูงขึ้น','กะบังลมคลายตัว/ยกขึ้น ซี่โครงหดลง','กะบังลมและซี่โครงอยู่นิ่ง','ซี่โครงยกขึ้น กะบังลมยกขึ้น'],a:0,
+  e:'หายใจเข้า: ซี่โครงยกตัวสูงขึ้น + กะบังลมหดตัว (เลื่อนต่ำลง) ทำให้ปอดขยาย รับอากาศเข้า'},
+ {c:'breath',q:'อวัยวะใดเป็นทางผ่านของอากาศเข้าสู่ปอด และดักฝุ่นไม่ให้เข้าปอด',o:['จมูก','หลอดลม','ถุงลม','กะบังลม'],a:1,
+  e:'หลอดลมเป็นทางผ่านของอากาศเข้าสู่ปอด และช่วยดักฝุ่นละอองไม่ให้เข้าปอด'},
+ {c:'breath',q:'ทางเดินอากาศหายใจข้อใดเรียงถูกต้อง',o:['จมูก → หลอดลม → ปอด → หลอดลมฝอย → ถุงลม','ปอด → จมูก → ถุงลม → หลอดลม','ถุงลม → ปอด → จมูก → หลอดลม','จมูก → ถุงลม → ปอด → หลอดลม'],a:0,
+  e:'อากาศเดินทาง: จมูก → หลอดลม → ปอด → หลอดลมฝอย → ถุงลม (แลกเปลี่ยนแก๊สที่ถุงลม)'},
+ {c:'breath',q:'ข้อใดเป็นการดูแลรักษาระบบหายใจให้ทำงานเป็นปกติ',o:['อยู่ในบริเวณที่มีฝุ่นละอองมาก ๆ','อยู่ในบริเวณที่มีอากาศบริสุทธิ์','สั่งน้ำมูกแรง ๆ','ดื่มน้ำเย็นเป็นประจำ'],a:1,
+  e:'ควรอยู่ในบริเวณอากาศบริสุทธิ์ เลี่ยงที่ฝุ่นเยอะ ใส่หน้ากากเมื่ออยู่ในที่มีฝุ่นควันหรือเป็นหวัด'},
+ {c:'breath',q:'พฤติกรรมข้อใด “ไม่เหมาะสม” ในการดูแลระบบต่าง ๆ ของร่างกาย',o:['ดื่มน้ำสะอาดวันละ 7–8 แก้ว','อยู่ในบริเวณที่มีอากาศบริสุทธิ์','ออกกำลังกายเดือนละ 1 ครั้ง','ทำจิตใจให้ร่าเริงแจ่มใส'],a:2,
+  e:'ออกกำลังกายเดือนละ 1 ครั้ง “น้อยเกินไป” ควรออกกำลังกายอย่างสม่ำเสมอ (เช่น สัปดาห์ละ 3–5 ครั้ง)'},
+
+ // ---- RELATION ----
+ {c:'relation',q:'การสร้างและรักษาสัมพันธภาพกับบุคคลอื่นมีความสำคัญอย่างไร',o:['ทำให้เป็นผู้นำกลุ่ม','ครอบครัวมีชื่อเสียง','สุขภาพร่างกายแข็งแรง','อยู่ร่วมกันในสังคมได้อย่างมีความสุข'],a:3,
+  e:'สัมพันธภาพที่ดีทำให้ทุกคนอยู่ร่วมกันในสังคมได้อย่างมีความสุข เป็นที่รักและได้รับไมตรีจากผู้อื่น'},
+ {c:'relation',q:'“สัมพันธภาพ” หมายถึงอะไร',o:['ความสัมพันธ์ระหว่างคน 2 คนหรือมากกว่าที่เข้าใจกัน','การอยู่คนเดียวอย่างมีความสุข','การแข่งขันเอาชนะผู้อื่น','การทำงานให้เสร็จเร็วที่สุด'],a:0,
+  e:'สัมพันธภาพ = ความสัมพันธ์ระหว่างคน 2 คนขึ้นไป ที่มีปฏิสัมพันธ์กันจนเข้าใจกัน เป็นมิตร และส่งผลดีต่อกัน'},
+ {c:'relation',q:'ข้อใดเป็นการสร้างและรักษาสัมพันธภาพกับสมาชิกในครอบครัว',o:['แย่งขนมของน้อง','ทำการบ้านให้น้อง','ช่วยผู้ปกครองทำงานบ้าน','ทำตัวให้เด่นเพื่อสร้างความสนใจ'],a:2,
+  e:'ช่วยผู้ปกครองทำงานบ้านเป็นการแสดงความห่วงใยและช่วยเหลือกันในครอบครัว (ทำการบ้าน “ให้” น้อง ไม่ช่วยให้น้องเก่งขึ้น)'},
+ {c:'relation',q:'ข้อใดเป็นผลของการมีสัมพันธภาพที่ดีกับสมาชิกในครอบครัว',o:['ไม่เจ็บป่วย','มีสุขภาพจิตดี','มีฐานะการเงินดีขึ้น','เป็นที่ยอมรับของคนในสังคม'],a:1,
+  e:'ครอบครัวที่มีสัมพันธภาพที่ดีจะอบอุ่นและมีความสุข ทำให้สมาชิกมี “สุขภาพจิตดี”'},
+ {c:'relation',q:'การกระทำในข้อใดแสดงถึงการมีสัมพันธภาพที่ดีกับเพื่อน',o:['พูดจาไพเราะกับเพื่อน','แกล้งเพื่อนที่อ่อนแอกว่า','ให้เพื่อนช่วยทำการบ้านให้','เอาใจเพื่อนที่เรียนเก่ง'],a:0,
+  e:'พูดจาไพเราะ ยิ้มแย้ม ให้กำลังใจ เป็นการสร้างสัมพันธภาพที่ดีกับเพื่อน ส่วนการแกล้งหรือเอาเปรียบเพื่อนไม่ใช่'},
+ {c:'relation',q:'ข้อใด “ไม่ใช่” การสร้างและรักษาสัมพันธภาพที่ดีกับเพื่อน',o:['ยิ้มทักทายเพื่อน','แบ่งขนมให้เพื่อนรับประทาน','ช่วยทำการบ้านให้เพื่อนทุกวัน','ช่วยเพื่อนทำความสะอาดห้องเรียน'],a:2,
+  e:'“ช่วยทำการบ้านให้เพื่อนทุกวัน” ไม่เหมาะสม เพราะทำให้เพื่อนไม่ได้ฝึกเอง ควร “ช่วยอธิบาย” มากกว่าทำให้'},
+ {c:'relation',q:'ข้อใดเป็นการสร้างและรักษาสัมพันธภาพที่ดีกับบุคคลอื่น',o:['แย่งของเล่นจากรุ่นน้อง','ช่วยผู้สูงอายุถือของหนัก','พูดจาหยาบคายกับคนไม่รู้จัก','ไม่ขอบคุณเมื่อมีคนช่วยถือของ'],a:1,
+  e:'ช่วยผู้สูงอายุถือของหนักเป็นการมีน้ำใจช่วยเหลือผู้อื่น สร้างสัมพันธภาพที่ดีกับบุคคลทั่วไป'},
+ {c:'relation',q:'ถ้านักเรียนต่างโรงเรียนที่ไม่รู้จักยิ้มให้ นักเรียนควรปฏิบัติอย่างไร',o:['ทำหน้าบึ้งใส่','ทำหน้าเฉย ๆ','ยิ้มทักทายตอบ','พูดจาหยาบคายตอบ'],a:2,
+  e:'เมื่อมีคนยิ้มให้ ควร “ยิ้มทักทายตอบ” เป็นการแสดงไมตรีจิตและมารยาทที่ดีต่อบุคคลอื่น'},
+ {c:'relation',q:'คุณธรรมข้อใดที่ช่วยให้การทำงานร่วมกันประสบความสำเร็จ',o:['ความเมตตากรุณา','ความรับผิดชอบ','ความกล้าหาญ','ความประหยัด'],a:1,
+  e:'การทำงานกลุ่มต้องแบ่งหน้าที่และมี “ความรับผิดชอบ” ต่องานของตน จึงทำให้งานสำเร็จและมีประสิทธิภาพ'},
+ {c:'relation',q:'ข้อใด “ไม่ใช่” ปัจจัยที่ช่วยให้การทำงานร่วมกันประสบความสำเร็จ',o:['สร้างสัมพันธภาพที่ดีระหว่างสมาชิก','ยอมรับความคิดเห็นและความแตกต่างของกัน','แบ่งหน้าที่ตามความถนัดและรับผิดชอบ','ยึดความคิดของหัวหน้าเป็นใหญ่คนเดียว'],a:3,
+  e:'ควรตกลงกันแบบประชาธิปไตย ให้ทุกคนแสดงความเห็นอย่างเท่าเทียม ไม่ยึดความคิดของคนใดคนหนึ่งเป็นใหญ่'}
+];
+
+/* ---------- RENDER QUIZ ---------- */
+const quizbox=document.getElementById('quizbox');
+let filter='all';
+let done=new Set(), right=0, wrong=0;
+
+function render(){
+  quizbox.innerHTML='';
+  const list=Q.map((q,i)=>({q,i})).filter(x=>filter==='all'||x.q.c===filter);
+  document.getElementById('sc-total').textContent=list.length;
+  list.forEach((x,idx)=>{
+    const q=x.q, gi=x.i;
+    const el=document.createElement('div');
+    el.className='q '+q.c;
+    el.innerHTML=`<div class="qhead">
+        <span class="qnum">${idx+1}</span>
+        <div><span class="qtag ${q.c}">${CAT[q.c]}</span>
+        <div class="qtext">${q.q}</div></div>
+      </div>
+      <ul class="opts"></ul>
+      <div class="explain"><span class="ico">💡 เฉลย:</span> ${q.e}</div>`;
+    const ul=el.querySelector('.opts');
+    const labels=['ก','ข','ค','ง'];
+    q.o.forEach((op,oi)=>{
+      const li=document.createElement('li');
+      li.className='opt';
+      li.innerHTML=`<span class="lbl">${labels[oi]}</span><span>${op}</span>`;
+      li.addEventListener('click',()=>choose(el,li,q,gi,oi));
+      ul.appendChild(li);
+    });
+    quizbox.appendChild(el);
+  });
+  updateScore();
+}
+function choose(el,li,q,gi,oi){
+  if(el.dataset.answered)return;
+  el.dataset.answered='1';
+  const opts=el.querySelectorAll('.opt');
+  opts.forEach((o,k)=>{
+    o.classList.add('lock');
+    if(k===q.a)o.classList.add('correct');
+  });
+  if(oi===q.a){right++;}
+  else{li.classList.add('wrong');wrong++;}
+  done.add(gi);
+  el.querySelector('.explain').classList.add('show');
+  updateScore();
+}
+function updateScore(){
+  document.getElementById('sc-right').textContent=right;
+  document.getElementById('sc-wrong').textContent=wrong;
+  document.getElementById('sc-done').textContent=done.size;
+}
+/* filter buttons */
+document.querySelectorAll('#filter button').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('#filter button').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on');
+  filter=b.dataset.f;
+  render();
+}));
+/* reset */
+document.getElementById('resetBtn').addEventListener('click',()=>{
+  done=new Set();right=0;wrong=0;render();
+  window.scrollTo({top:document.querySelector('.quiz-top').offsetTop-10,behavior:'smooth'});
+});
+render();
+</script>
+</body>
+</html>
